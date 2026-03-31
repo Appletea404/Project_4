@@ -1,0 +1,4 @@
+Time resolution is 1 ps
+Block Memory Generator module tb_OV.dfs.bram0.inst.native_mem_module.blk_mem_gen_v8_4_9_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Warning: [Unisim MMCME2_ADV-20] Input CLKIN1 period and attribute CLKIN1_PERIOD are not same. Instance tb_OV.dfs.cw0.inst.mmcm_adv_inst 
+$finish called at time : 4300100 ns : File "/home/jsh-laptop/workspace_ondevice_2/fpga/self_study/OV7670/OV7670.srcs/sim_1/new/tb_OV.sv" Line 73
