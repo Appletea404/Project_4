@@ -1,7 +1,0 @@
-Running: xsim.dir/tb_fadder_4bit_structural_behav/xsimk -simmode gui -wdb tb_fadder_4bit_structural_behav.wdb -simrunnum 0 -socket 60619
-Design successfully loaded
-Design Loading Memory Usage: 181644 KB (Peak: 181764 KB)
-Design Loading CPU Usage: 570 ms
-Simulation completed
-Simulation Memory Usage: 263380 KB (Peak: 320912 KB)
-Simulation CPU Usage: 580 ms

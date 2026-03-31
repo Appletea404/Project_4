@@ -1,7 +1,0 @@
-Running: xsim.dir/tb_glitch_example_behav/xsimk -simmode gui -wdb tb_glitch_example_behav.wdb -simrunnum 0 -socket 43813
-Design successfully loaded
-Design Loading Memory Usage: 181632 KB (Peak: 181752 KB)
-Design Loading CPU Usage: 560 ms
-Simulation completed
-Simulation Memory Usage: 263368 KB (Peak: 320900 KB)
-Simulation CPU Usage: 560 ms

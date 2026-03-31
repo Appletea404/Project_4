@@ -1,7 +1,0 @@
-Running: xsim.dir/tb_shift_register_SISO_n_behav/xsimk -simmode gui -wdb tb_shift_register_SISO_n_behav.wdb -simrunnum 0 -socket 48847
-Design successfully loaded
-Design Loading Memory Usage: 181628 KB (Peak: 181748 KB)
-Design Loading CPU Usage: 590 ms
-Simulation completed
-Simulation Memory Usage: 263624 KB (Peak: 320896 KB)
-Simulation CPU Usage: 590 ms
