@@ -20,239 +20,113 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+
 // ==========================================================
-// 1. TOP MODULE
+// 1. TOP MODULE: 토글 방식 수동 제어 포함
 // ==========================================================
-// ==========================================================
-// 1. TOP MODULE: 전체 시스템 연결 (Parallel 처리)
-// ==========================================================
-module fan_auto_system_top(
+module fan_system_top(
     input clk, reset_p,
     inout dht11_data,
+    input btn_mode,       // 모드 전환 버튼 (BTNC) - 자동/수동
+    input btn_manual,     // 수동 토글 버튼 (BTNU) - 켜짐/꺼짐
     output fan_pwm,
-    output led_fan_on,
-    output scl, sda
+    output [7:0] seg,     // 7세그먼트 데이터
+    output [3:0] an,      // 7세그먼트 자릿수 선택
+    output led_mode,      // LD0: ON(수동), OFF(자동)
+    output led_manual_on, // LD1: 수동 모드에서 팬이 켜졌을 때 점등
+    output led_fan_on     // LD15: 실제로 팬이 돌고 있을 때 점등
 );
-    wire [7:0] current_temp, current_humi;
-    wire fan_on_condition;
-    
-    // 설정 온도/습도 임계값 (테스트를 위해 낮게 설정 가능)
-    parameter TEMP_THRESHOLD = 8'd26; 
-    parameter HUMI_THRESHOLD = 8'd70; 
 
-    // [모듈 1] DHT11 센서 제어기 (온습도 읽기)
+    wire [7:0] current_temp, current_humi;
+    reg mode_reg;          // 0: 자동, 1: 수동
+    reg manual_fan_reg;    // 수동 모드일 때 팬의 온/오프 상태 저장
+    
+    wire btn_mode_pedge;
+    wire btn_manual_pedge;
+    wire fan_on_signal;
+    reg [7:0] duty_val;
+
+    // 1. 에지 검출기: 버튼을 누르는 '순간'만 펄스 발생
+    edge_detector_p ed_mode (.clk(clk), .reset_p(reset_p), .cp(btn_mode), .p_edge(btn_mode_pedge));
+    edge_detector_p ed_manual (.clk(clk), .reset_p(reset_p), .cp(btn_manual), .p_edge(btn_manual_pedge));
+    
+    // 2. 모드 전환 로직 (BTNC 누를 때마다 반전)
+    always @(posedge clk or posedge reset_p) begin
+        if(reset_p) mode_reg <= 0;
+        else if(btn_mode_pedge) mode_reg <= ~mode_reg;
+    end
+    assign led_mode = mode_reg;
+
+    // 3. 수동 팬 토글 로직 (수동 모드에서 BTNU 누를 때마다 반전)
+    always @(posedge clk or posedge reset_p) begin
+        if(reset_p) manual_fan_reg <= 0;
+        else if(mode_reg) begin // 수동 모드일 때만 작동
+            if(btn_manual_pedge) manual_fan_reg <= ~manual_fan_reg;
+        end
+        else manual_fan_reg <= 0; // 자동 모드로 돌아오면 수동 상태 초기화
+    end
+    assign led_manual_on = manual_fan_reg;
+
+    // 4. DHT11 센서 읽기
     dht11_cntr u_dht11 (
         .clk(clk), .reset_p(reset_p), .dht11_data(dht11_data),
-        .temperature(current_temp), .humidity(current_humi), .led()
+        .temperature(current_temp), .humidity(current_humi)
     );
 
-    // [모듈 2] 선풍기 작동 조건 (온도 OR 습도)
-    assign fan_on_condition = (current_temp >= TEMP_THRESHOLD || current_humi >= HUMI_THRESHOLD);
-    assign led_fan_on = fan_on_condition; // 조건 만족 시 LD15 점등
+    // 5. 최종 팬 구동 신호 결정
+    // 자동 모드(mode_reg=0): 센서 조건 | 수동 모드(mode_reg=1): 토글 레지스터 상태
+    assign fan_on_signal = mode_reg ? manual_fan_reg : (current_temp >= 31 || current_humi >= 70);
+    assign led_fan_on = fan_on_signal;
 
-    // [모듈 3] PWM 생성기 (모터 제어)
-    pwm_Nfreq_Nstep u_pwm (
-        .clk(clk), .reset_p(reset_p), 
-        .duty(fan_on_condition ? 8'd200 : 8'd0), 
-        .pwm(fan_pwm)
-    );
+    // 6. PWM 출력
+    always @(posedge clk or posedge reset_p) begin
+        if(reset_p) duty_val <= 0;
+        else duty_val <= fan_on_signal ? 8'd200 : 8'd0;
+    end
 
-    // [모듈 4] I2C LCD 컨트롤러 (화면 출력)
-    i2c_lcd_main_control u_lcd (
+    pwm_Nfreq_Nstep u_pwm (.clk(clk), .reset_p(reset_p), .duty(duty_val), .pwm(fan_pwm));
+
+    // 7. 7세그먼트 표시 (온도/습도)
+    fnd_4digit_control u_fnd (
         .clk(clk), .reset_p(reset_p),
-        .temperature(current_temp), .humidity(current_humi),
-        .scl(scl), .sda(sda)
-    );
-endmodule
-
-// ==========================================================
-// 2. LCD MAIN CONTROL: 초기화 대기 시간 강화 버전
-// ==========================================================
-module i2c_lcd_main_control(
-    input clk, reset_p,
-    input [7:0] temperature, humidity,
-    output scl, sda
-);
-    localparam LCD_ADDR = 7'h3F; // 안 나오면 7'h3F로 변경
-
-    reg [7:0] send_buffer;
-    reg send, rs;
-    wire busy;
-
-    i2c_lcd_send_byte lcd_send_inst (
-        .clk(clk), .reset_p(reset_p), .addr(LCD_ADDR),
-        .send_buffer(send_buffer), .send(send), .rs(rs),
-        .scl(scl), .sda(sda), .busy(busy)
+        .value_left(current_temp), .value_right(current_humi),
+        .seg(seg), .an(an)
     );
 
-    wire [7:0] t10 = (temperature / 10) + 8'h30;
-    wire [7:0] t1  = (temperature % 10) + 8'h30;
-    wire [7:0] h10 = (humidity / 10) + 8'h30;
-    wire [7:0] h1  = (humidity % 10) + 8'h30;
-
-    reg [5:0] state;
-    reg [23:0] wait_cnt;
-
-    always @(posedge clk or posedge reset_p) begin
-        if(reset_p) begin 
-            state <= 0; send <= 0; rs <= 0; wait_cnt <= 0; 
-        end else begin
-            case(state)
-                // 전원 인가 후 LCD 안정화 대기 (약 100ms)
-                0: begin
-                    if(wait_cnt >= 24'd10_000_000) begin wait_cnt <= 0; state <= 1; end
-                    else wait_cnt <= wait_cnt + 1;
-                end
-                // 정석 초기화 시퀀스
-                1: if(!busy) begin send_buffer <= 8'h33; rs <= 0; send <= 1; state <= 2; end
-                2: begin send <= 0; state <= 3; end
-                3: if(!busy) begin send_buffer <= 8'h32; rs <= 0; send <= 1; state <= 4; end
-                4: begin send <= 0; state <= 5; end
-                5: if(!busy) begin send_buffer <= 8'h28; rs <= 0; send <= 1; state <= 6; end
-                6: begin send <= 0; state <= 7; end
-                7: if(!busy) begin send_buffer <= 8'h0C; rs <= 0; send <= 1; state <= 8; end
-                8: begin send <= 0; state <= 9; end
-                9: if(!busy) begin send_buffer <= 8'h01; rs <= 0; send <= 1; state <= 10; end
-                10: begin send <= 0; state <= 11; end
-
-                // 첫 줄 출력 "T:XXC"
-                11: if(!busy) begin send_buffer <= 8'h80; rs <= 0; send <= 1; state <= 12; end
-                12: begin send <= 0; state <= 13; end
-                13: if(!busy) begin send_buffer <= "T"; rs <= 1; send <= 1; state <= 14; end
-                14: begin send <= 0; state <= 15; end
-                15: if(!busy) begin send_buffer <= ":"; rs <= 1; send <= 1; state <= 16; end
-                16: begin send <= 0; state <= 17; end
-                17: if(!busy) begin send_buffer <= t10; rs <= 1; send <= 1; state <= 18; end
-                18: begin send <= 0; state <= 19; end
-                19: if(!busy) begin send_buffer <= t1; rs <= 1; send <= 1; state <= 20; end
-                20: begin send <= 0; state <= 21; end
-                21: if(!busy) begin send_buffer <= "C"; rs <= 1; send <= 1; state <= 22; end
-                22: begin send <= 0; state <= 23; end
-
-                // 둘째 줄 출력 "H:XX%"
-                23: if(!busy) begin send_buffer <= 8'hC0; rs <= 0; send <= 1; state <= 24; end
-                24: begin send <= 0; state <= 25; end
-                25: if(!busy) begin send_buffer <= "H"; rs <= 1; send <= 1; state <= 26; end
-                26: begin send <= 0; state <= 27; end
-                27: if(!busy) begin send_buffer <= ":"; rs <= 1; send <= 1; state <= 28; end
-                28: begin send <= 0; state <= 29; end
-                29: if(!busy) begin send_buffer <= h10; rs <= 1; send <= 1; state <= 30; end
-                30: begin send <= 0; state <= 31; end
-                31: if(!busy) begin send_buffer <= h1; rs <= 1; send <= 1; state <= 32; end
-                32: begin send <= 0; state <= 33; end
-                33: if(!busy) begin send_buffer <= "%"; rs <= 1; send <= 1; state <= 34; end
-                34: begin send <= 0; state <= 35; end
-
-                // 화면 갱신 대기 (약 0.5초)
-                35: begin 
-                    if(wait_cnt >= 24'd10_000_000) begin wait_cnt <= 0; state <= 11; end
-                    else wait_cnt <= wait_cnt + 1;
-                end
-                default: state <= 0;
-            endcase
-        end
-    end
 endmodule
 
 // ==========================================================
-// 3. I2C LCD SEND BYTE: 바이트 분할 전송
+// 2. 7세그먼트 4자리 제어기 (변경 없음)
 // ==========================================================
-module i2c_lcd_send_byte(
+module fnd_4digit_control(
     input clk, reset_p,
-    input [6:0] addr, input [7:0] send_buffer,
-    input send, rs,
-    output scl, sda, output reg busy
+    input [7:0] value_left, value_right,
+    output reg [7:0] seg, output reg [3:0] an
 );
-    localparam IDLE=3'd0, SHD=3'd1, SHE=3'd2, SLD=3'd3, SLE=3'd4, SD=3'd5;
-    wire clk_usec_nedge, send_pedge, i2c_busy;
-    reg [21:0] count_usec; reg count_usec_e, comm_start;
-    reg [7:0] data; reg [2:0] state;
-
-    clock_usec usec_clk(.clk(clk), .reset_p(reset_p), .clk_usec_nedge(clk_usec_nedge));
-    edge_detector_p ed_start(.clk(clk), .reset_p(reset_p), .cp(send), .p_edge(send_pedge));
-    
-    // I2C Master 연결
-    I2C_master master_inst (.clk(clk), .reset_p(reset_p), .addr(addr), .data(data), .rw(1'b0), .start(comm_start), .scl(scl), .sda(sda), .busy(i2c_busy));
-
-    always @(posedge clk or posedge reset_p) begin
-        if(reset_p) begin 
-            state <= IDLE; comm_start <= 0; count_usec_e <= 0; busy <= 0; count_usec <= 0; 
-        end else begin
-            if(clk_usec_nedge && count_usec_e) count_usec <= count_usec + 1;
-            case(state)
-                IDLE: begin busy <= 0; if(send_pedge) begin busy <= 1; state <= SHD; count_usec <= 0; end end
-                SHD: begin count_usec_e <= 1; data <= {send_buffer[7:4], 3'b100, rs}; comm_start <= 1; 
-                     if(count_usec >= 200) begin comm_start <= 0; state <= SHE; count_usec <= 0; end end
-                SHE: begin count_usec_e <= 1; data <= {send_buffer[7:4], 3'b110, rs}; comm_start <= 1; 
-                     if(count_usec >= 200) begin comm_start <= 0; state <= SLD; count_usec <= 0; end end
-                SLD: begin count_usec_e <= 1; data <= {send_buffer[3:0], 3'b100, rs}; comm_start <= 1; 
-                     if(count_usec >= 200) begin comm_start <= 0; state <= SLE; count_usec <= 0; end end
-                SLE: begin count_usec_e <= 1; data <= {send_buffer[3:0], 3'b110, rs}; comm_start <= 1; 
-                     if(count_usec >= 200) begin comm_start <= 0; state <= SD; count_usec <= 0; end end
-                SD:  begin count_usec_e <= 1; data <= {send_buffer[3:0], 3'b100, rs}; comm_start <= 1; 
-                     if(count_usec >= 200) begin comm_start <= 0; state <= IDLE; count_usec <= 0; count_usec_e <= 0; end end
-            endcase
-        end
+    wire [3:0] temp_10 = value_left / 10;
+    wire [3:0] temp_1  = value_left % 10;
+    wire [3:0] humi_10 = value_right / 10;
+    wire [3:0] humi_1  = value_right % 10;
+    reg [16:0] clk_div;
+    always @(posedge clk) clk_div <= clk_div + 1;
+    always @(*) begin
+        case(clk_div[16:15])
+            2'b00: begin an = 4'b0111; seg = fnd_decoder(temp_10); end
+            2'b01: begin an = 4'b1011; seg = fnd_decoder(temp_1);  end
+            2'b10: begin an = 4'b1101; seg = fnd_decoder(humi_10); end
+            2'b11: begin an = 4'b1110; seg = fnd_decoder(humi_1);  end
+        endcase
     end
-endmodule
-
-// ==========================================================
-// 4. I2C MASTER: 합성 에러 방지 버전 (Perfect)
-// ==========================================================
-module I2C_master(
-    input clk, reset_p,
-    input [6:0] addr, input [7:0] data, input rw, input start,
-    output reg scl, inout sda, output reg busy
-);
-    parameter IDLE=4'd0, START=4'd1, ADDR=4'd2, ACK1=4'd3, DATA=4'd4, ACK2=4'd5, STOP=4'd6;
-    reg [3:0] state;
-    reg [6:0] addr_reg; reg [7:0] data_reg; reg rw_reg;
-    reg [3:0] bit_cnt; reg sda_out, sda_en;
-    assign sda = sda_en ? sda_out : 1'bz;
-
-    reg [8:0] clk_cnt; reg i2c_clk;
-    always @(posedge clk or posedge reset_p) begin
-        if(reset_p) begin clk_cnt <= 0; i2c_clk <= 0; end
-        else if(clk_cnt >= 249) begin clk_cnt <= 0; i2c_clk <= ~i2c_clk; end
-        else clk_cnt <= clk_cnt + 1;
-    end
-
-    always @(posedge i2c_clk or posedge reset_p) begin
-        if(reset_p) begin 
-            state <= IDLE; bit_cnt <= 7; busy <= 0; scl <= 1; sda_out <= 1; sda_en <= 1; 
-        end else begin
-            case(state)
-                IDLE: begin 
-                    busy <= 0; scl <= 1; sda_out <= 1; sda_en <= 1;
-                    if(start) begin state <= START; addr_reg <= addr; data_reg <= data; rw_reg <= rw; busy <= 1; end
-                end
-                START: begin sda_out <= 0; state <= ADDR; end
-                ADDR: begin 
-                    scl <= ~scl; 
-                    if(scl) begin
-                        if(bit_cnt > 0) sda_out <= addr_reg[bit_cnt-1];
-                        else sda_out <= rw_reg;
-                        if(bit_cnt == 0) begin state <= ACK1; bit_cnt <= 7; end
-                        else bit_cnt <= bit_cnt - 1;
-                    end
-                end
-                ACK1: begin scl <= ~scl; if(scl) begin sda_en <= 0; state <= DATA; end end
-                DATA: begin 
-                    scl <= ~scl; sda_en <= 1;
-                    if(scl) begin
-                        sda_out <= data_reg[bit_cnt];
-                        if(bit_cnt == 0) begin state <= ACK2; bit_cnt <= 7; end
-                        else bit_cnt <= bit_cnt - 1;
-                    end
-                end
-                ACK2: begin scl <= ~scl; if(scl) begin sda_en <= 0; state <= STOP; end end
-                STOP: begin 
-                    if(!scl) scl <= 1;
-                    else begin sda_en <= 1; sda_out <= 1; state <= IDLE; end
-                end
-            endcase
-        end
-    end
+    function [7:0] fnd_decoder(input [3:0] num);
+        case(num)
+            4'h0: fnd_decoder = 8'hC0; 4'h1: fnd_decoder = 8'hF9;
+            4'h2: fnd_decoder = 8'hA4; 4'h3: fnd_decoder = 8'hB0;
+            4'h4: fnd_decoder = 8'h99; 4'h5: fnd_decoder = 8'h92;
+            4'h6: fnd_decoder = 8'h82; 4'h7: fnd_decoder = 8'hF8;
+            4'h8: fnd_decoder = 8'h80; 4'h9: fnd_decoder = 8'h90;
+            default: fnd_decoder = 8'hFF;
+        endcase
+    endfunction
 endmodule
 
 // ==========================================================
