@@ -1,0 +1,35 @@
+Vivado Simulator v2024.2.0
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /opt/Xilinx/Vivado/2024.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L blk_mem_gen_v8_4_9 -L uvm -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot tb_OV_behav xil_defaultlib.tb_OV xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3823] variable 'MCLK' might have multiple concurrent drivers [/home/jsh-laptop/workspace_ondevice_2/fpga/self_study/OV7670_2/OV7670_2.srcs/sim_1/imports/new/tb_OV.sv:113]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.my_vga_if_default
+Compiling module unisims_ver.IBUF
+Compiling module unisims_ver.MMCME2_ADV(CLKFBOUT_MULT_F=35.25...
+Compiling module unisims_ver.BUFG
+Compiling module xil_defaultlib.clk_wiz_0_clk_wiz
+Compiling module xil_defaultlib.clk_wiz_0
+Compiling module xil_defaultlib.VGA_controller_m_default
+Compiling module xil_defaultlib.VGA_controller_b_default
+Compiling module xil_defaultlib.OV_write_default
+Compiling module xil_defaultlib.OV_read_default
+Compiling module xil_defaultlib.OV_MASTER_default
+Compiling module xil_defaultlib.make_sio_c_default
+Compiling module xil_defaultlib.edge_detector_n_default
+Compiling module xil_defaultlib.Image_conv_default
+Compiling module blk_mem_gen_v8_4_9.blk_mem_gen_v8_4_9_output_stage(...
+Compiling module blk_mem_gen_v8_4_9.blk_mem_gen_v8_4_9_softecc_outpu...
+Compiling module blk_mem_gen_v8_4_9.blk_mem_gen_v8_4_9_mem_module(C_...
+Compiling module blk_mem_gen_v8_4_9.blk_mem_gen_v8_4_9(C_FAMILY="art...
+Compiling module xil_defaultlib.blk_mem_gen_0
+Compiling module xil_defaultlib.OV_VGA
+Compiling module xil_defaultlib.tb_OV
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_OV_behav
