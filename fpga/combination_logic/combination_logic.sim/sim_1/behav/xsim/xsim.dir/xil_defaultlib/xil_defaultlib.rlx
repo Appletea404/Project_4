@@ -1,0 +1,21 @@
+0.7
+2020.2
+Nov  8 2024
+22:36:55
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.sim/sim_1/behav/xsim/glbl.v,1724786425,verilog,,,,glbl,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_D_flip_flop.v,1774335891,verilog,,,,tb_D_flip_flop;tb_D_flip_flop_n;tb_T_flip_flop_n;tb_clock_div_100;tb_clock_div_1000;tb_down_counter_asyc;tb_edge_detector_n;tb_ring_counter;tb_shift_register_SISO_n;tb_up_count_asyc;tb_up_down_counter,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_and_gate.v,1773713912,verilog,,,,tb_and_gate,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_comparator.v,1773888768,verilog,,,,tb_comparator,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_full_adder.v,1773885570,verilog,,,,tb_fadder_4bit_structural;tb_full_adder;tb_n_bit_adder,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_glitch_example.v,1774228201,verilog,,,,tb_glitch_example,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_half_adder.v,1773799059,verilog,,,,tb_half_adder,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_mux.v,1773975287,verilog,,,,tb_demux_1_2;tb_demux_1_4;tb_mux;tb_mux_2_1;tb_mux_4_1;tb_mux_8_1;tb_mux_demux_test,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/and_gate.v,1773731387,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_and_gate.v,,and_gate;and_gate_behavioral;and_gate_dataflow;and_gate_structual,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/coder.v,1773901864,verilog,,,,coder;decoder_2_4;decoder_7seg;encoder_4_2,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/comparator.v,1773888769,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_comparator.v,,comparator;comparator_behavioral;comparator_dataflow;comparator_structural,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/full_adder.v,1773885231,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/half_adder.v,,fadder_4bit_dataflow;fadder_4bit_structural;full_adder_behavioral;full_adder_dataflow;full_adder_structural;n_bit_adder_structural,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/gates.v,1773731387,verilog,,,,gates,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/glitch_example.v,1774228090,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_glitch_example.v,,glitch_example,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/half_adder.v,1773800381,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_full_adder.v,,half_adder;half_adder_dataflow;half_adder_structural,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/mux.v,1773975442,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_mux.v,,demux_1_2;demux_1_4;mux_2_1;mux_4_1;mux_8_1;mux_demux_test,,,,,,,,
+/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sources_1/new/sequential_logic.v,1774336009,verilog,,/home/kwakyj91/workspace_ondevice_2/fpga/combination_logic/combination_logic.srcs/sim_1/new/tb_D_flip_flop.v,,D_flip_flop;D_flip_flop_n;D_flip_flop_p;T_flip_flop_n;T_flip_flop_p;clock_div_100;clock_div_1000;clock_div_1hz_top;down_counter_asyc;down_counter_p;edge_detector_n;led_blink_1s;led_pattern;ring_counter;sequential_logic;shift_register_SISO_n;top_led;up_counter_asyc;up_counter_p,,,,,,,,
