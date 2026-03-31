@@ -21,7 +21,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/impl_1'
+HD_PWD='/home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -38,7 +38,7 @@ EAStep()
 }
 
 # pre-commands:
-/bin/touch .init_design.begin.rst
+/bin/touch .write_bitstream.begin.rst
 EAStep vivado -log fan_system_top.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source fan_system_top.tcl -notrace
 
 

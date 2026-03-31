@@ -21,7 +21,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/synth_1'
+HD_PWD='/home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

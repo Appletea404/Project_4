@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/synth_1/fan_system_top.tcl"
+  variable script "/home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.runs/synth_1/fan_system_top.tcl"
   variable category "vivado_synth"
 }
 
@@ -56,27 +56,25 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 2
-set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.cache/wt [current_project]
-set_property parent.project_path /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.xpr [current_project]
+set_property webtalk.parent_dir /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.cache/wt [current_project]
+set_property parent.project_path /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property board_part_repo_paths {/home/kwakyj91/.Xilinx/Vivado/2024.2/xhub/board_store/xilinx_board_store} [current_project]
+set_property board_part_repo_paths {/home/appletea/.Xilinx/Vivado/2024.2/xhub/board_store/xilinx_board_store} [current_project]
 set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]
-set_property ip_output_repo /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.cache/ip [current_project]
+set_property ip_output_repo /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/sequential_logic.v
-  /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/pro_test.v
+  /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/sequential_logic.v
+  /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/pro_test.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -87,12 +85,12 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc
-set_property used_in_implementation false [get_files /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc]
+read_xdc /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc
+set_property used_in_implementation false [get_files /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 
-read_checkpoint -auto_incremental -incremental /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/utils_1/imports/synth_1/watch.dcp
+read_checkpoint -auto_incremental -incremental /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/utils_1/imports/synth_1/watch.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
