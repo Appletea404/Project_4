@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1774935426" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/OV_VGA.dcp">
-  <File Type="VDS-TIMINGSUMMARY" Name="OV_VGA_timing_summary_synth.rpt"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1774943217" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/OV_VGA.dcp">
   <File Type="RDS-DCP" Name="OV_VGA.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="OV_VGA_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="OV_VGA_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="OV_VGA_drc_synth.rpt"/>
   <File Type="RDS-RDS" Name="OV_VGA.vds"/>
   <File Type="REPORTS-TCL" Name="OV_VGA_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="OV_VGA_timing_summary_synth.pb"/>
   <File Type="PA-TCL" Name="OV_VGA.tcl"/>
+  <File Type="RDS-UTIL" Name="OV_VGA_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="OV_VGA_utilization_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/ip/clk_wiz_0/clk_wiz_0.xci">

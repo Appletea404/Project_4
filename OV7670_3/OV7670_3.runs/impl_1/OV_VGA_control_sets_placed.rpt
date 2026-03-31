@@ -1,0 +1,99 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
+| Date         : Tue Mar 31 18:51:21 2026
+| Host         : jsh-laptop-14TD90Q-GX5PK running 64-bit Ubuntu 24.04.4 LTS
+| Command      : report_control_sets -verbose -file OV_VGA_control_sets_placed.rpt
+| Design       : OV_VGA
+| Device       : xc7a35t
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    21 |
+|    Minimum number of control sets                        |    21 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    78 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    21 |
+| >= 0 to < 4        |     1 |
+| >= 4 to < 6        |     6 |
+| >= 6 to < 8        |     3 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     3 |
+| >= 14 to < 16      |     2 |
+| >= 16              |     4 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              21 |           14 |
+| No           | No                    | Yes                    |              43 |           22 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              26 |            8 |
+| Yes          | No                    | Yes                    |             120 |           38 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------------+--------------------------------------+------------------+------------------+----------------+--------------+
+|    Clock Signal    |             Enable Signal            | Set/Reset Signal | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------+--------------------------------------+------------------+------------------+----------------+--------------+
+|  PCLK_IBUF_BUFG    | Icv0/m\\.led_clk2_i_1_n_0            | Icv0/rstn        |                1 |              1 |         1.00 |
+|  cw0/inst/clk_out1 | rd/phase1_cnt[3]_i_1_n_0             | Icv0/rstn        |                2 |              4 |         2.00 |
+|  cw0/inst/clk_out1 | wt/phase1_cnt[3]_i_1__0_n_0          | Icv0/rstn        |                1 |              4 |         4.00 |
+|  cw0/inst/clk_out1 | rd/timing_cnt[4]_i_1__0_n_0          | Icv0/rstn        |                2 |              5 |         2.50 |
+|  cw0/inst/clk_out1 | wt/timing_cnt[4]_i_1_n_0             | Icv0/rstn        |                2 |              5 |         2.50 |
+|  cw0/inst/clk_out1 | ov_m/FSM_onehot_st_master[4]_i_1_n_0 | Icv0/rstn        |                2 |              5 |         2.50 |
+|  PCLK_IBUF_BUFG    |                                      | Icv0/rstn        |                2 |              5 |         2.50 |
+|  cw0/inst/clk_out1 | ov_m/COMMAND                         | Icv0/rstn        |                1 |              6 |         6.00 |
+|  PCLK_IBUF_BUFG    | Icv0/green_0                         | Icv0/rstn        |                2 |              7 |         3.50 |
+|  cw0/inst/clk_out1 | wt/E[0]                              | Icv0/rstn        |                3 |              7 |         2.33 |
+|  cw0/inst/clk_out2 |                                      |                  |                7 |              9 |         1.29 |
+|  cw0/inst/clk_out2 | b0/Vsync_cnt_0                       | Icv0/rstn        |                4 |             10 |         2.50 |
+|  PCLK_IBUF_BUFG    | Icv0/m\\.in_dt[11]_i_1_n_0           | Icv0/rstn        |                3 |             12 |         4.00 |
+|  cw0/inst/clk_out2 | rstn_IBUF                            |                  |                3 |             12 |         4.00 |
+|  cw0/inst/clk_out1 |                                      |                  |                7 |             12 |         1.71 |
+|  cw0/inst/clk_out2 |                                      | Icv0/rstn        |                8 |             14 |         1.75 |
+|  cw0/inst/clk_out1 | ov_m/mi0\\.Sub_address[7]_i_1_n_0    |                  |                5 |             14 |         2.80 |
+|  PCLK_IBUF_BUFG    | Icv0/m\\.addra[0]_i_1_n_0            | Icv0/rstn        |                5 |             18 |         3.60 |
+|  cw0/inst/clk_out1 | ov_m/timer_0                         | Icv0/rstn        |                6 |             18 |         3.00 |
+|  cw0/inst/clk_out2 | b0/mi0\\.addrb                       | Icv0/rstn        |                4 |             18 |         4.50 |
+|  cw0/inst/clk_out1 |                                      | Icv0/rstn        |               12 |             24 |         2.00 |
++--------------------+--------------------------------------+------------------+------------------+----------------+--------------+
+
+

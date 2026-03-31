@@ -95,23 +95,42 @@ module VGA_controller_b ( my_vga_if.bot mi0 );
         초기화 할 때 addrb를 어떻게 초기화 할것인가.
         
     */
-    logic check;
     //assign offset <= (room_ff[1]==0) ? 72000 : 0;
+    logic rot;
     always@(posedge mi0.clk_vga or negedge mi0.rstn)begin
         if(!mi0.rstn)begin
             mi0.addrb <= 0;
-            check <= 0;
+            rot <= 0;
         end
         else begin
         
             if(Vsync_cnt == 0)begin  
                 //mi0.addrb <= (room_ff[1]==0) ? 0 : 72000;
-                mi0.addrb <= (room_ff[1]==0) ? 0 : 72000;
+                mi0.addrb <= (room_ff[1]==0) ? 72000 : 0;
             end else begin
-            // 162 ~ 386 :: 31 ~ 511
+            /*
+                640*480
+                320*24
+            */
+            // 162 ~ 386 :: 31 ~ 511 303 623
+//            if((Vsync_cnt >= 162) && (Vsync_cnt < 386) &&
+//                    (Hsync_cnt >= 303) && (Hsync_cnt < 623))begin
+                    
+//                    //지금3단이다. 위.아래,X,위,아래,x..
+//                    //                            위, 아래,아래  위 아래 아래 ...
+//                    mi0.addrb <= mi0.addrb + 1;
+////                    if(!room_ff[1]) mi0.addrb <= (mi0.addrb < 143999) ? mi0.addrb + 1 : 72000;
+////                    else mi0.addrb <= (mi0.addrb < 71999) ? mi0.addrb + 1 : 0;
+//                end
+//            end
                 if((Vsync_cnt >= 31) && (Vsync_cnt < 511) &&
-                    (Hsync_cnt >= 303) && (Hsync_cnt < 623))begin
+                    (Hsync_cnt >= 304) && (Hsync_cnt < 624))begin
+                    
+                    //지금3단이다. 위.아래,X,위,아래,x..
+                    //                            위, 아래,아래  위 아래 아래 ...
                     mi0.addrb <= mi0.addrb + 1;
+//                    if(!room_ff[1]) mi0.addrb <= (mi0.addrb < 143999) ? mi0.addrb + 1 : 72000;
+//                    else mi0.addrb <= (mi0.addrb < 71999) ? mi0.addrb + 1 : 0;
                 end
             end
             /*
@@ -127,8 +146,9 @@ module VGA_controller_b ( my_vga_if.bot mi0 );
                 31 ~ 271
                 272 ~ 511
             */
+            //304 624, 162 386
 //                if((Hsync_cnt >= 304 && Hsync_cnt < 624) &&
-//                    (Vsync_cnt >= 162 && Vsync_cnt < 386))begin
+//                    (Vsync_cnt >= 162 && Vsync_cnt < 386) )begin
 //                    mi0.vgaRed     <= mi0.doutb[11:8];
 //                    mi0.vgaGreen <= mi0.doutb[7:4];
 //                    mi0.vgaBlue    <= mi0.doutb[3:0];
@@ -143,9 +163,9 @@ module VGA_controller_b ( my_vga_if.bot mi0 );
                     1번방 쓰고 있으면 0번방 출력. x 271 ~ 511
                     &&
                     (mi0.addrb <= 71999)
-                    00.01.1x,0
+                    00 0x 11 01 ..
                     
-                    
+                    1번 사진을 내려서 0번사진이 좀더 잘나오게 쓰레기값 제거.
                 */
                  if((Hsync_cnt >= 304 && Hsync_cnt < 624) &&
                     (Vsync_cnt >= 31 && Vsync_cnt < 271) )begin
@@ -154,8 +174,7 @@ module VGA_controller_b ( my_vga_if.bot mi0 );
                     mi0.vgaBlue    <= mi0.doutb[3:0];
                 end
                 else if((Hsync_cnt >= 304 && Hsync_cnt < 624) && //거의 다썻을때
-                            (Vsync_cnt >= 271 && Vsync_cnt < 511) && 
-                            (mi0.addrb >= 71999) )begin
+                            (Vsync_cnt >= 271 && Vsync_cnt < 511) )begin
                     mi0.vgaRed     <= mi0.doutb[11:8];
                     mi0.vgaGreen <= mi0.doutb[7:4];
                     mi0.vgaBlue    <= mi0.doutb[3:0];
@@ -166,26 +185,6 @@ module VGA_controller_b ( my_vga_if.bot mi0 );
                     mi0.vgaBlue    <= 0;
                 end
 
-//                if((Hsync_cnt >= 304 && Hsync_cnt < 624) &&
-//                    (Vsync_cnt >= 31 && Vsync_cnt < 271))begin
-//                    mi0.vgaRed     <= mi0.doutb[11:8];
-//                    mi0.vgaGreen <= mi0.doutb[7:4];
-//                    mi0.vgaBlue    <= mi0.doutb[3:0];
-//                end
-//                else if((Hsync_cnt >= 304 && Hsync_cnt < 624) &&
-//                            (Vsync_cnt >= 271 && Vsync_cnt < 511))begin
-//                    mi0.vgaRed     <= mi0.doutb[11:8];
-//                    mi0.vgaGreen <= mi0.doutb[7:4];
-//                    mi0.vgaBlue    <= mi0.doutb[3:0];
-//                end 
-//                //test
-                
-//                else begin
-//                    mi0.vgaRed     <= 0;
-//                    mi0.vgaGreen <= 0;
-//                    mi0.vgaBlue    <= 0;
-//                end
-            
         end
     end
     

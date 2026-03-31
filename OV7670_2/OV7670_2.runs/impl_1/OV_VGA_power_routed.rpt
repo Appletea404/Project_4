@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Tue Mar 31 14:38:12 2026
+| Date             : Tue Mar 31 16:48:03 2026
 | Host             : jsh-laptop-14TD90Q-GX5PK running 64-bit Ubuntu 24.04.4 LTS
 | Command          : report_power -file OV_VGA_power_routed.rpt -pb OV_VGA_power_summary_routed.pb -rpx OV_VGA_power_routed.rpx
 | Design           : OV_VGA
@@ -53,13 +53,13 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.001 |       11 |       --- |             --- |
-| Slice Logic    |    <0.001 |      882 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      406 |     20800 |            1.95 |
+| Slice Logic    |    <0.001 |      877 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      408 |     20800 |            1.96 |
 |   CARRY4       |    <0.001 |       15 |      8150 |            0.18 |
 |   Register     |    <0.001 |      207 |     41600 |            0.50 |
 |   F7/F8 Muxes  |    <0.001 |       54 |     32600 |            0.17 |
 |   Others       |     0.000 |      110 |       --- |             --- |
-| Signals        |    <0.001 |      886 |       --- |             --- |
+| Signals        |    <0.001 |      876 |       --- |             --- |
 | Block RAM      |     0.003 |       49 |        50 |           98.00 |
 | MMCM           |     0.101 |        1 |         5 |           20.00 |
 | I/O            |     0.004 |       34 |       106 |           32.08 |

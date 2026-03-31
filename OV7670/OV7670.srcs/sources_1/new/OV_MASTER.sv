@@ -29,7 +29,7 @@ always@(*) begin
     case(COMMAND)
         // 1. 초기화 및 기본 모드 (기존 유지)
         0: COMMAND_reg = {8'h12, 8'h80}; // COM7: Reset
-        1: COMMAND_reg = {8'h12, 8'h01}; // COM7: QVGA + RGB 선택
+        1: COMMAND_reg = {8'h12, 8'h01}; // COM7: QVGA + RGB 선택 1
         
         // 2. 사선 및 타이밍 해결 (핵심!)
         2: COMMAND_reg = {8'h15, 8'h00}; // COM10: PCLK가 HSYNC 전후로 멈추지 않게 설정 (중요)
@@ -37,7 +37,7 @@ always@(*) begin
         
         // 3. RGB444 및 데이터 순서 고정 (색상 뭉침 방지)
         4: COMMAND_reg = {8'h40, 8'hD0}; // COM15: RGB444 + Full Range (00-FF)
-        5: COMMAND_reg = {8'h8C, 8'h02}; // RGB444: 출력 활성화
+        5: COMMAND_reg = {8'h8C, 8'h00}; // RGB444: 출력 활성화 2
         
         // 4. 화질 자동 조절 (이거 없으면 화면이 너무 어둡거나 하얗게 나옵니다)
         6: COMMAND_reg = {8'h13, 8'hE7}; // COM8: Fast AGC/AEC/AWB 활성화

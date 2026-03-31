@@ -27,7 +27,8 @@
 module Image_conv(my_vga_if.image_cov m);
 
     logic rgb;
-    logic [3:0] rgb_bu;
+    logic [4:0] red;
+    logic [2:0] green;
     logic edge_reg;
     logic p_edge;
     logic [1:0] sync_pclk;
@@ -48,11 +49,12 @@ module Image_conv(my_vga_if.image_cov m);
             m.in_dt <= 0;
             m.wt_valid <= 0;
             m.addra <= 0;
-            rgb_bu <= 0;
             m.finish <= 0;
             m.led_clk2 <= 0;
             edge_reg <= 0;
             p_edge <= 0;
+            red <= 0;
+            green <= 0;
         end else begin
             edge_reg <= m.Camera_Vs; // 카메라의 Vs는 Active High 평소에 0
             p_edge <= ({edge_reg, m.Camera_Vs} == 2'b01); //rising edge찾기
@@ -73,13 +75,13 @@ module Image_conv(my_vga_if.image_cov m);
                         m.led_clk2 <= 1;
                     end else if( !m.Camera_Vs)begin
                         if(m.Camera_Hs)begin
-                             if(!rgb)begin
-                                rgb <= 1;
-                                rgb_bu <= m.image_data[3:0];//xr
+                             if(rgb)begin
+                                rgb <= 0;
+                                {red,green} <= {m.image_data[7:4],m.image_data[2:0]};
                                 m.wt_valid <= 0;
                             end else begin
-                                rgb <= 0;
-                                m.in_dt <= (rgb_bu << 8) | m.image_data;//gb
+                                rgb <= 1;
+                                m.in_dt <= {red,green,m.image_data[7],m.image_data[4:1]};
                                 m.wt_valid <= 1;
                                 m.addra <= m.addra + 1;
                             end

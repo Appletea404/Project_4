@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date             : Mon Mar 30 18:55:40 2026
+| Date             : Tue Mar 31 19:17:02 2026
 | Host             : jsh-laptop-14TD90Q-GX5PK running 64-bit Ubuntu 24.04.4 LTS
 | Command          : report_power -file OV_VGA_power_routed.rpt -pb OV_VGA_power_summary_routed.pb -rpx OV_VGA_power_routed.rpx
 | Design           : OV_VGA
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.184        |
+| Total On-Chip Power (W)  | 0.183        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.110        |
@@ -53,10 +53,10 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.001 |       11 |       --- |             --- |
-| Slice Logic    |    <0.001 |      698 |       --- |             --- |
+| Slice Logic    |    <0.001 |      699 |       --- |             --- |
 |   LUT as Logic |    <0.001 |      322 |     20800 |            1.55 |
 |   CARRY4       |    <0.001 |       13 |      8150 |            0.16 |
-|   Register     |    <0.001 |      199 |     41600 |            0.48 |
+|   Register     |    <0.001 |      201 |     41600 |            0.48 |
 |   F7/F8 Muxes  |    <0.001 |       20 |     32600 |            0.06 |
 |   Others       |     0.000 |       69 |       --- |             --- |
 | Signals        |    <0.001 |      643 |       --- |             --- |
@@ -64,7 +64,7 @@ Table of Contents
 | MMCM           |     0.101 |        1 |         5 |           20.00 |
 | I/O            |     0.003 |       34 |       106 |           32.08 |
 | Static Power   |     0.073 |          |           |                 |
-| Total          |     0.184 |          |           |                 |
+| Total          |     0.183 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -152,9 +152,9 @@ Table of Contents
 | Name                   | Power (W) |
 +------------------------+-----------+
 | OV_VGA                 |     0.110 |
-|   bram0                |     0.006 |
-|     U0                 |     0.006 |
-|       inst_blk_mem_gen |     0.006 |
+|   bram0                |     0.005 |
+|     U0                 |     0.005 |
+|       inst_blk_mem_gen |     0.005 |
 |   cw0                  |     0.101 |
 |     inst               |     0.101 |
 +------------------------+-----------+
