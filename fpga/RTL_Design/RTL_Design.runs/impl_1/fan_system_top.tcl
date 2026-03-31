@@ -106,6 +106,7 @@ set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
   set_param chipscope.maxJobs 3
+  set_param xicom.use_bs_reader 1
   set_param runs.launchOptions { -jobs 12  }
   open_checkpoint fan_system_top_routed.dcp
   set_property webtalk.parent_dir /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.cache/wt [current_project]

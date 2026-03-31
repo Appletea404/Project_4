@@ -34,7 +34,9 @@ module fan_system_top(
     output [3:0] an,      // 7세그먼트 자릿수 선택
     output led_mode,      // LD0: ON(수동), OFF(자동)
     output led_manual_on, // LD1: 수동 모드에서 팬이 켜졌을 때 점등
-    output led_fan_on     // LD15: 실제로 팬이 돌고 있을 때 점등
+    output led_fan_on,    // LD15: 실제로 팬이 돌고 있을 때 점등
+    output scl,
+    inout  sda
 );
 
     wire [7:0] current_temp, current_humi;
@@ -91,6 +93,13 @@ module fan_system_top(
         .clk(clk), .reset_p(reset_p),
         .value_left(current_temp), .value_right(current_humi),
         .seg(seg), .an(an)
+    );
+
+    // 8. LCD I2C 출력 (온도/습도)
+    lcd_i2c_top u_lcd (
+        .clk(clk), .reset_p(reset_p),
+        .temperature(current_temp), .humidity(current_humi),
+        .scl(scl), .sda(sda)
     );
 
 endmodule
@@ -184,3 +193,5 @@ module edge_detector_p(input clk, reset_p, cp, output p_edge, output n_edge);
     reg ff1, ff2; always @(posedge clk or posedge reset_p) if(reset_p) {ff1, ff2} <= 0; else {ff2, ff1} <= {ff1, cp};
     assign p_edge = ({ff2, ff1} == 2'b01); assign n_edge = ({ff2, ff1} == 2'b10);
 endmodule
+
+

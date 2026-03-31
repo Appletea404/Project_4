@@ -56,6 +56,8 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 3
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -73,6 +75,8 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
+  /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/exam_module.v
+  /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/lcd_i2c.v
   /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/sequential_logic.v
   /home/appletea/workspace_onedevice_2/Project_4/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/pro_test.v
 }
