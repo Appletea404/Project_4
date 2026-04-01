@@ -1,0 +1,337 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Wed Apr  1 11:34:41 2026
+# Process ID         : 44051
+# Current directory  : /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/synth_1
+# Command line       : vivado -log fan_dual_system_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source fan_dual_system_top.tcl
+# Log file           : /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/synth_1/fan_dual_system_top.vds
+# Journal file       : /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/synth_1/vivado.jou
+# Running On         : kwakyj91
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : AMD Ryzen AI 5 330 w/ Radeon 820M
+# CPU Frequency      : 4550.493 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 32714 MB
+# Swap memory        : 8589 MB
+# Total Virtual      : 41304 MB
+# Available Virtual  : 36248 MB
+#-----------------------------------------------------------
+source fan_dual_system_top.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/utils_1/imports/synth_1/watch.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/utils_1/imports/synth_1/watch.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top fan_dual_system_top -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 44077
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1838.582 ; gain = 428.816 ; free physical = 17040 ; free virtual = 33507
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-9873] overwriting previous definition of module 'edge_detector_p' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:247]
+INFO: [Synth 8-9937] previous definition of design element 'edge_detector_p' is here [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/sequential_logic.v:213]
+INFO: [Synth 8-6157] synthesizing module 'fan_dual_system_top' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:37]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector_p' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:244]
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector_p' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:244]
+WARNING: [Synth 8-7071] port 'n_edge' of module 'edge_detector_p' is unconnected for instance 'ed0' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:62]
+WARNING: [Synth 8-7023] instance 'ed0' of module 'edge_detector_p' has 5 connections declared, but only 4 given [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:62]
+WARNING: [Synth 8-7071] port 'n_edge' of module 'edge_detector_p' is unconnected for instance 'ed1' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:63]
+WARNING: [Synth 8-7023] instance 'ed1' of module 'edge_detector_p' has 5 connections declared, but only 4 given [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:63]
+WARNING: [Synth 8-7071] port 'n_edge' of module 'edge_detector_p' is unconnected for instance 'ed2' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:64]
+WARNING: [Synth 8-7023] instance 'ed2' of module 'edge_detector_p' has 5 connections declared, but only 4 given [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:64]
+INFO: [Synth 8-6157] synthesizing module 'dht11_cntr' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:209]
+INFO: [Synth 8-6157] synthesizing module 'clock_usec' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:239]
+INFO: [Synth 8-6155] done synthesizing module 'clock_usec' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:239]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:223]
+INFO: [Synth 8-6155] done synthesizing module 'dht11_cntr' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:209]
+INFO: [Synth 8-6157] synthesizing module 'pwm_Nfreq_Nstep' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:249]
+INFO: [Synth 8-6155] done synthesizing module 'pwm_Nfreq_Nstep' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:249]
+WARNING: [Synth 8-689] width (32) of port connection 'duty' does not match port width (8) of module 'pwm_Nfreq_Nstep' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:89]
+WARNING: [Synth 8-689] width (32) of port connection 'duty' does not match port width (8) of module 'pwm_Nfreq_Nstep' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:90]
+INFO: [Synth 8-6157] synthesizing module 'fnd_4digit_control' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:185]
+INFO: [Synth 8-6155] done synthesizing module 'fnd_4digit_control' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:185]
+INFO: [Synth 8-6157] synthesizing module 'vga_controller' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:166]
+INFO: [Synth 8-6155] done synthesizing module 'vga_controller' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:166]
+INFO: [Synth 8-6157] synthesizing module 'vga_pixel_gen' [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:124]
+INFO: [Synth 8-6155] done synthesizing module 'vga_pixel_gen' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:124]
+INFO: [Synth 8-6155] done synthesizing module 'fan_dual_system_top' (0#1) [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:37]
+WARNING: [Synth 8-7137] Register u_cnt_reg in module dht11_cntr has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:222]
+WARNING: [Synth 8-7137] Register d_out_en_reg in module dht11_cntr has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:215]
+WARNING: [Synth 8-7137] Register d_out_reg in module dht11_cntr has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:215]
+WARNING: [Synth 8-7137] Register r_st_reg in module dht11_cntr has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:230]
+WARNING: [Synth 8-7137] Register t_raw_reg in module dht11_cntr has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/sources_1/new/project_b.v:231]
+WARNING: [Synth 8-7129] Port reset_p in module vga_controller is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_p in module fnd_4digit_control is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_p in module pwm_Nfreq_Nstep is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_p in module edge_detector_p is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_p in module clock_usec is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1912.520 ; gain = 502.754 ; free physical = 16951 ; free virtual = 33420
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1930.332 ; gain = 520.566 ; free physical = 16948 ; free virtual = 33416
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1930.332 ; gain = 520.566 ; free physical = 16948 ; free virtual = 33416
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1930.332 ; gain = 0.000 ; free physical = 16948 ; free virtual = 33416
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc]
+WARNING: [Vivado 12-584] No ports matched 'led_manual_on'. [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc:32]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc:32]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'led_fan_on'. [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc:46]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc:46]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.srcs/constrs_1/imports/fpga/Basys-3-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/fan_dual_system_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/fan_dual_system_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2079.082 ; gain = 0.000 ; free physical = 16940 ; free virtual = 33408
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2079.082 ; gain = 0.000 ; free physical = 16940 ; free virtual = 33408
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2079.082 ; gain = 669.316 ; free physical = 16951 ; free virtual = 33419
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2087.086 ; gain = 677.320 ; free physical = 16951 ; free virtual = 33419
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2087.086 ; gain = 677.320 ; free physical = 16951 ; free virtual = 33419
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'dht11_cntr'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  S_IDLE |                              000 |                              000
+              S_LOW_18MS |                              001 |                              001
+             S_HIGH_20US |                              010 |                              010
+              S_LOW_80US |                              011 |                              011
+             S_HIGH_80US |                              100 |                              100
+                  S_READ |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'dht11_cntr'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2087.086 ; gain = 677.320 ; free physical = 16947 ; free virtual = 33416
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   22 Bit       Adders := 2     
+	   2 Input   10 Bit       Adders := 2     
+	   2 Input    8 Bit       Adders := 2     
+	   2 Input    7 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 2     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	               40 Bit    Registers := 2     
+	               22 Bit    Registers := 2     
+	               10 Bit    Registers := 2     
+	                8 Bit    Registers := 6     
+	                7 Bit    Registers := 2     
+	                6 Bit    Registers := 2     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 21    
++---Muxes : 
+	   2 Input   22 Bit        Muxes := 10    
+	   6 Input   22 Bit        Muxes := 2     
+	   2 Input    8 Bit        Muxes := 2     
+	   2 Input    6 Bit        Muxes := 2     
+	   4 Input    4 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 18    
+	   6 Input    1 Bit        Muxes := 20    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port reset_p in module vga_controller is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_p in module fnd_4digit_control is either unconnected or has no load
+WARNING: [Synth 8-7129] Port reset_p in module pwm_Nfreq_Nstep is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2087.086 ; gain = 677.320 ; free physical = 16922 ; free virtual = 33396
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 2107.086 ; gain = 697.320 ; free physical = 16875 ; free virtual = 33349
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 2178.703 ; gain = 768.938 ; free physical = 16819 ; free virtual = 33294
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 2178.703 ; gain = 768.938 ; free physical = 16819 ; free virtual = 33294
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++--------------------+--------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name         | RTL Name           | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++--------------------+--------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|fan_dual_system_top | dht1/t_raw_reg[32] | 9      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|fan_dual_system_top | dht1/t_raw_reg[16] | 17     | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|fan_dual_system_top | dht2/t_raw_reg[32] | 9      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|fan_dual_system_top | dht2/t_raw_reg[16] | 17     | 1     | NO           | NO                 | YES               | 1      | 0       | 
++--------------------+--------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |    19|
+|3     |LUT1   |     9|
+|4     |LUT2   |    37|
+|5     |LUT3   |    48|
+|6     |LUT4   |    39|
+|7     |LUT5   |    47|
+|8     |LUT6   |   136|
+|9     |SRL16E |     4|
+|10    |FDCE   |    55|
+|11    |FDRE   |   159|
+|12    |IBUF   |     6|
+|13    |IOBUF  |     2|
+|14    |OBUF   |    30|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.484 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 2297.484 ; gain = 738.969 ; free physical = 16739 ; free virtual = 33213
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 2297.492 ; gain = 887.719 ; free physical = 16739 ; free virtual = 33213
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2297.492 ; gain = 0.000 ; free physical = 16739 ; free virtual = 33213
+INFO: [Netlist 29-17] Analyzing 21 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2353.512 ; gain = 0.000 ; free physical = 16898 ; free virtual = 33373
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 2 instances
+
+Synth Design complete | Checksum: b545ddc4
+INFO: [Common 17-83] Releasing license: Synthesis
+41 Infos, 24 Warnings, 3 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:24 ; elapsed = 00:00:21 . Memory (MB): peak = 2353.512 ; gain = 1008.215 ; free physical = 16898 ; free virtual = 33373
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1525.745; main = 1525.745; forked = 269.266
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 3007.965; main = 2353.516; forked = 920.875
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2377.523 ; gain = 0.000 ; free physical = 16898 ; free virtual = 33373
+INFO: [Common 17-1381] The checkpoint '/home/kwakyj91/workspace_ondevice_2/fpga/RTL_Design/RTL_Design.runs/synth_1/fan_dual_system_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file fan_dual_system_top_utilization_synth.rpt -pb fan_dual_system_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Wed Apr  1 11:35:04 2026...

@@ -37,4 +37,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log fan_system_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source fan_system_top.tcl
+EAStep vivado -log fan_dual_system_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source fan_dual_system_top.tcl
