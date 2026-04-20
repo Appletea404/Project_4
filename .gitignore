@@ -11,3 +11,11 @@
 !README.md
 !CLAUDE.md
 !.gitignore
+
+# 4. 이건 다시 무시
+.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
