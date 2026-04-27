@@ -3,8 +3,8 @@
 # 🌀 Project 4 Ceiling AirCirculator
 
 ## **1. Project Summary (프로젝트 요약)**
-Basys3 FPGA 보드에서 순수 Verilog RTL 설계로 구현한 온도 감지 기반 자동 공기순환 제어 시스템
-<br>두 개의 팬을 온도에 따라 자동으로 제어하며, FSM 및 PWM 기반의 하드웨어 로직으로 구성됨
+Basys3 FPGA 보드에서 Verilog RTL 설계로 구현한 온도 감지 기반 자동 공기순환 제어 시스템
+
 
 
 ## 2. Key Features (주요 기능)
@@ -71,27 +71,23 @@ Project_4/
 
 ### 4.2 Hardware BlockDiagram (하드웨어 블록다이어그램)
 
-![BlockDiagram](images/blockdiagram.png)
+![BlockDiagram](images/Diagram.png)
 
-### 4.3 State Machine (상태 머신)
+### 4.3 Flow Chart (순서도)
 
-![StateMachine](images/statemachine.png)
+![FlowChart](images/Flowchart.png)
+
+### 4.4 시스템 상세 구성
+
+![System1](images/System1.png)
+![System2](images/System2.png)
 
 
-## 🏁 5. Final Product & Demonstration (완성품 및 시연)
+## 🏁 5. Demonstration (시연영상)
 
-### 5.1 Final Product (완성품)
-<br>
+### Demonstration (시연 영상)
 
-| **전체 구성 (Full Setup)** | **FPGA 보드 (Basys3)** | **회로 배선 (Wiring)** |
-| :---: | :---: | :---: |
-| ![Full](images/full.jpg) | ![Board](images/board.jpg) | ![Wiring](images/wiring.jpg) |
-
-<br>
-
-### 5.2 Demonstration (시연 영상)
-
-<a href="[시연 영상 URL 입력]" target="_blank">
+<a href="https://youtu.be/iMNkvyhp4iY" target="_blank">
   <img src="images/youtube.jpg" alt="Watch Demo Video" width="300" />
 </a>
 
@@ -100,60 +96,40 @@ Project_4/
 
 ## 6. Troubleshooting (문제 해결 기록)
 
-### 6.1 [트러블슈팅 제목 입력]
+### 6.1 LCD 기기 작동 구현 실패
 
 🔍 **Issue (문제 상황)**
 
-- 
+- 원래 계획이던 **CLCD (HD 44780)** 의 **I2C**통신이 실패하여 활용하지 못함
 
 ❓ **Analysis (원인 분석)**
 
-- 
+- Verilog에서의 타이밍 구현이 미숙
 
 ❗ **Action (해결 방법)**
 
-- 
+- VGA를 활용한 모니터 출력으로 대채방안 마련
 
 ✅ **Result (결과)**
 
-- 
+- DHT11의로 나오는 출력값을 대체하여 보여줌
 
 ---
 
-### 6.2 [트러블슈팅 제목 입력]
+### 6.2 출력 채널의 혼동
 
 🔍 **Issue (문제 상황)**
 
-- 
+- 실제로 작동시킨 **Fan**이 어느쪽의 채널인지 불확실함
 
 ❓ **Analysis (원인 분석)**
 
-- 
+- 2개의 채널을 이용하는데 표시하는 부분이 없음
 
 ❗ **Action (해결 방법)**
 
-- 
+- VGA를 통해 1번, 2번 채널을 표시하고 켜져있는지 꺼져 있는지 확인
 
 ✅ **Result (결과)**
 
-- 
-
----
-
-### 6.3 [트러블슈팅 제목 입력]
-
-🔍 **Issue (문제 상황)**
-
-- 
-
-❓ **Analysis (원인 분석)**
-
-- 
-
-❗ **Action (해결 방법)**
-
-- 
-
-✅ **Result (결과)**
-
-- 
+- 실제로 어디 부분에서 잘못되었는지 파악이 빨라져서 디버깅이 쉬워짐
