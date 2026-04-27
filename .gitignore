@@ -11,6 +11,7 @@
 !README.md
 !CLAUDE.md
 !.gitignore
+!images/**
 
 # 4. 이건 다시 무시
 .Xil/
